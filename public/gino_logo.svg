@@ -1,0 +1,14 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Cerchio di sfondo -->
+    <circle cx="100" cy="100" r="90" fill="#ffcc66" stroke="#cc9900" stroke-width="5" />
+    
+    <!-- Cappello da chef -->
+    <path d="M70 110 Q60 90 75 75 Q65 50 90 45 Q100 30 120 45 Q145 50 135 75 Q150 90 130 110 Z"
+          fill="white" stroke="#663300" stroke-width="3" />
+    
+    <!-- Base del cappello -->
+    <rect x="80" y="110" width="40" height="20" fill="white" stroke="#663300" stroke-width="3" />
+    
+    <!-- Testo -->
+    <text x="100" y="165" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#663300" text-anchor="middle">Gino Cousin</text>
+</svg>

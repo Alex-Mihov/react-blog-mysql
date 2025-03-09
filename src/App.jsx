@@ -1,33 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import DefaultLayout from "./layout/DefaultLayout"
+
+import GlobalContext from "./context/GlobalContext"
+
+import { useState, useEffect } from "react"
+
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+
+import axios from "axios"
+
+import HomePage from "./pages/HomePage"
+import PostsPage from "./pages/PostsPage"
+import AboutPage from "./pages/AboutPage"
+import ContactsPage from "./pages/ContactsPage"
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+
+  const [posts, setPosts] = useState([])
+
+  function FetchPosts() {
+
+
+    axios.get("http://localhost:3000/posts")
+      .then((res) => {
+        setPosts(res.data)
+        console.log(res);
+
+      })
+      .catch(err => console.log(err))
+  }
+
+  useEffect(FetchPosts, [])
+
+
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <GlobalContext.Provider value={{ posts }}>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="/posts" element={<PostsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contacts" element={<ContactsPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </GlobalContext.Provider>
+
     </>
   )
 }
